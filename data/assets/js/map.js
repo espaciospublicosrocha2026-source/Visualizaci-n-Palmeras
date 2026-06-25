@@ -22,9 +22,6 @@ const baseMaps = {
 // Añadir la capa base visible por defecto
 openStreetMap.addTo(map);
 
-// Si querés que la capa de la laguna aparezca al inicio, descomentar la línea siguiente
-// lagunaRochaSanAntonio.addTo(map);
-
 L.control.layers(baseMaps, overlays).addTo(map);
 
 // ======== Control de localización ========
