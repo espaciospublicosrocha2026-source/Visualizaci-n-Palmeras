@@ -7,28 +7,6 @@ const map = L.map('map', {
   maxZoom: 22   // 🔥 forzás zoom alto
 });
 
-// ===============================
-// CAPA BASE – ORTOFOTO INTENDENCIA
-// ===============================
-const ortofotoRocha = L.tileLayer.wms(
-  'https://sig.rocha.gub.uy/geoserver226/wms',
-  {
-    layers: 'sigRocha:ortofoto_nacional',
-    format: 'image/png',
-    transparent: false,
-    maxZoom: 22,
-    version: '1.1.1'
-  }
-);
-
-const esriImagery = L.tileLayer(
-  'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-  {
-    attribution: 'Tiles © Esri',
-    maxZoom: 22
-  }
-);
-
 const openStreetMap = L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   {
@@ -37,163 +15,12 @@ const openStreetMap = L.tileLayer(
   }
 );
 
-// ===============================
-// CAPAS SUPERPUESTAS (OVERLAYS)
-// ===============================
-const mosaicoUrbano = L.tileLayer.wms(
-  'https://sig.rocha.gub.uy/geoserver226/wms',
-  {
-    layers: 'sigRocha:ortofoto_urbana',
-    format: 'image/png',
-    transparent: true, // 🔥 para superponerse
-    maxZoom: 22,
-    version: '1.1.1'
-  }
-);
-
-const nombresCalles = L.tileLayer.wms(
-  'https://sig.rocha.gub.uy/geoserver226/wms',
-  {
-    layers: 'sigRocha:v_nombres_calles',
-    format: 'image/png',
-    transparent: true,
-    maxZoom: 22,
-    version: '1.1.1'
-  }
-);
-
-// ===============================
-// NUEVA CAPA: Laguna de Rocha - San Antonio (Julio 2023)
-// ===============================
-const lagunaRochaSanAntonio = L.tileLayer.wms(
-  'https://sig.rocha.gub.uy/geoserver226/wms',
-  {
-    layers: 'sigRocha:LagunaRocha_SanAntonio_5229_6423',
-    format: 'image/png',
-    transparent: true,  // 🔥 para superponerse
-    maxZoom: 22,
-    version: '1.1.1'
-  }
-);
-
-// ===============================
-// NUEVA CAPA: Pyramid (La Coronilla → Punta del Diablo, Agosto 2023)
-// ===============================
-const pyramid = L.tileLayer.wms(
-  'https://sig.rocha.gub.uy/geoserver226/wms',
-  {
-    layers: 'sigRocha:pyramid_3451_3676',
-    format: 'image/png',
-    transparent: true,  // 🔥 para superponerse
-    maxZoom: 22,
-    version: '1.1.1'
-  }
-);
-// ===============================
-// NUEVA CAPA: Postes kilométricos en rutas nacionales
-// ===============================
-const cabPostesKilometricos = L.tileLayer.wms(
-  'https://sig.rocha.gub.uy/geoserver226/wms',
-  {
-    layers: 'sigRocha:cab_postes_kilometricos',
-    format: 'image/png',
-    transparent: true,  // 🔥 para superponerse
-    maxZoom: 22,
-    version: '1.1.1'
-  }
-);
-
-// ===============================
-// NUEVA CAPA: Laguna Rocha - San Antonio (Julio 2023, 15 cm resolución)
-// ===============================
-const lagunaRochaSanAntonio_AltaRes = L.tileLayer.wms(
-  'https://sig.rocha.gub.uy/geoserver226/wms',
-  {
-    layers: 'sigRocha:LagunaRocha-SAnAntonio_5229_6422',
-    format: 'image/png',
-    transparent: true,
-    maxZoom: 22,
-    version: '1.1.1'
-  }
-);
-
-// ===============================
-// NUEVA CAPA: Pyramid (Barra del Chuy → La Coronilla, Agosto 2023)
-// ===============================
-const pyramidBarraChuy = L.tileLayer.wms(
-  'https://sig.rocha.gub.uy/geoserver226/wms',
-  {
-    layers: 'sigRocha:pyramid_3451_3695',
-    format: 'image/png',
-    transparent: true,
-    maxZoom: 22,
-    version: '1.1.1'
-  }
-);
-// ===============================
-// Localidades urbanas del departamento de Rocha
-// ===============================
-const cabLocalidades = L.tileLayer.wms(
-  'https://sig.rocha.gub.uy/geoserver226/wms',
-  {
-    layers: 'sigRocha:cab_localidades',
-    format: 'image/png',
-    transparent: true,
-    maxZoom: 22,
-   version: '1.1.1'
-  }
-);
-// ===============================
-// Cursos de agua (polígonos)
-// ===============================
-const cursosAguaPoligonos = L.tileLayer.wms(
-  'https://sig.rocha.gub.uy/geoserver226/wms',
-  {
-    layers: 'sigRocha:cursos_agua_poligonos',
-    format: 'image/png',
-    transparent: true,
-    maxZoom: 22,
-    version: '1.1.1'
-  }
-);
-// ===============================
-// Lagos y lagunas (polígonos)
-// ===============================
-const lagosLagunasPoligonos = L.tileLayer.wms(
-  'https://sig.rocha.gub.uy/geoserver226/wms',
-  {
-    layers: 'sigRocha:lagos_lagunas_poligonos',
-    format: 'image/png',
-    transparent: true,
-    maxZoom: 22,
-   version: '1.1.1'
-  }
-);
-
-// ===============================
-// CONTROL DE CAPAS
-// ===============================
 const baseMaps = {
-  "Mosaico Nacional-Urbano 2017-2018": ortofotoRocha,
-  "ESRI Satelital (respaldo)": esriImagery,
   "OpenStreetMap": openStreetMap
 };
 
-const overlays = {
-  "Mosaico Urbano (2017–2018)": mosaicoUrbano,
-  "Nombres de calles": nombresCalles,
-  "Laguna Rocha - San Antonio (Julio 2023)": lagunaRochaSanAntonio,
-  "Pyramid (La Coronilla → Punta del Diablo, Agosto 2023)": pyramid,
-  "Postes kilométricos (Rutas nacionales)": cabPostesKilometricos,
-  "Laguna Rocha - San Antonio (Julio 2023, 15 cm)": lagunaRochaSanAntonio_AltaRes,
-  "Pyramid (Barra del Chuy → La Coronilla, Agosto 2023)": pyramidBarraChuy,
-  "Localidades urbanas (Rocha)": cabLocalidades,
-  "Cursos de agua (polígonos)": cursosAguaPoligonos,
-  "Lagos y lagunas (polígonos)": lagosLagunasPoligonos
-};
-
 // Añadir la capa base visible por defecto
-ortofotoRocha.addTo(map);
+openStreetMap.addTo(map);
 
 // Si querés que la capa de la laguna aparezca al inicio, descomentar la línea siguiente
 // lagunaRochaSanAntonio.addTo(map);
