@@ -15,14 +15,7 @@ const openStreetMap = L.tileLayer(
   }
 );
 
-const baseMaps = {
-  "OpenStreetMap": openStreetMap
-};
-
-// Añadir la capa base visible por defecto
 openStreetMap.addTo(map);
-
-L.control.layers(baseMaps, overlays).addTo(map);
 
 // ======== Control de localización ========
 L.Control.Locate = L.Control.extend({
