@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Seguimiento de Palmeras – Rocha</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Leaflet -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
+  <!-- MarkerCluster -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css"
+  />
+
+  <!-- Leaflet Draw -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"
+  />
+
+  <!-- Tu CSS -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+  <!-- Evitar error favicon -->
+  <link rel="icon" href="data:,">
+</head>
+
+<body>
+
+<header class="header-app">
+
+  <!-- IZQUIERDA: LOGO + TÍTULOS -->
+  <div class="header-left">
+    
+	
+	<a href="index.html" >
+    <img
+      src="assets/img/Logo.png"
+      alt="Intendencia Departamental de Rocha"
+      class="logo-rocha">
+</a>
+
+    <div class="titulo-app">
+      <h1>Sistema de Monitoreo de Palmeras</h1>
+      <h2>Espacios Públicos · Intendencia Departamental de Rocha</h2>
+    </div>
+  </div>
+
+  <!-- DERECHA: LOGIN / LOGOUT -->
+  <div class="header-right">
+    <button id="btn-login">Ingresar</button>
+    <!-- si ya manejás logout por JS, este puede aparecer luego -->
+    <!-- <button id="btn-logout">Salir</button> -->
+  </div>
+
+</header>
+
+
+<!-- LOGIN -->
+<!-- ========================= -->
+<!-- ========================= -->
+<!-- LOGIN MODAL -->
+<!-- ========================= -->
+<div id="auth-modal" class="modal">
+  <div class="modal-content">
+    <span id="cerrar-login" class="cerrar">&times;</span>
+
+    <form id="login-form">
+      <h3>Ingreso</h3>
+
+      <input
+        type="text"
+        id="usuario"
+        name="usuario"
+        placeholder="Usuario"
+        required
+      />
+
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Contraseña"
+        required
+      />
+
+      <button type="submit">Ingresar</button>
+
+      <p id="login-mensaje"></p>
+    </form>
+  </div>
+</div>
+
+
+<!-- Botón logout -->
+<button 
+  id="logout-btn" 
+  style="display:none; position:fixed; top:10px; right:10px;"
+>
+  Cerrar sesión
+</button>
+
+<!-- Modal confirmar eliminar -->
+<div id="confirmar-eliminar" class="confirmar">
+  <div class="confirmar-box">
+    <p>¿Eliminar esta palmera?</p>
+    <div class="confirmar-acciones">
+      <button id="cancelar-eliminar">Cancelar</button>
+      <button id="aceptar-eliminar">Eliminar</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- FILTROS -->
+<div id="filtros">
+  <label for="filtro-estado">Estado:</label>
+  <select id="filtro-estado">
+    <option value="todos">Todos</option>
+    <option value="sana">Sana</option>
+    <option value="afectada">Afectada</option>
+    <option value="muerta">Muerta</option>
+    <option value="tratamiento">Tratamiento</option>
+    <option value="revision">Revisión</option>
+  </select>
+
+  <label for="filtro-privacidad">Privacidad:</label>
+  <select id="filtro-privacidad">
+    <option value="todas">Todas</option>
+    <option value="publica">Pública</option>
+    <option value="privada">Privada</option>
+  </select>
+
+  <label for="filtro-especie">Especie:</label>
+  <select id="filtro-especie">
+    <option value="todas">Todas</option>
+    <option value="Butia">Butia</option>
+    <option value="Syagrus (Pindó)">Syagrus (Pindó)</option>
+    <option value="Phoenix">Phoenix</option>
+    <option value="Washingtonia">Washingtonia</option>
+  </select>
+
+  <label for="filtro-gestion">Gestión:</label>
+  <select id="filtro-gestion">
+    <option value="todas">Todas</option>
+    <option value="ninguno">Ninguno</option>
+    <option value="cortafuego">Cortafuego</option>
+    <option value="intercambio">Intercambio</option>
+    <option value="pago">Tratamiento pago</option>
+  </select>
+</div>
+
+
+
+<!-- MAPA -->
+<div id="map"></div>
+
+<!-- ===============================
+     SCRIPTS (ORDEN CRÍTICO)
+=============================== -->
+
+<!-- Leaflet -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- MarkerCluster -->
+<script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+
+<!-- Leaflet Draw -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+
+
+<script type="module" src="assets/js/auth.js"></script>
+<script type="module" src="assets/js/map.js"></script>
+
+</body>
+</html>
